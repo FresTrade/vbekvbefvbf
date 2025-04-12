@@ -44,7 +44,7 @@ MIN_DATA_POINTS = 30
 ssl_context = ssl.create_default_context(cafile=certifi.where())
 
 # Инициализация бота
-bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML" if parse_mode == "HTML" else None))
 dp = Dispatcher()
 
 # Глобальные переменные
@@ -304,13 +304,11 @@ TEXTS = {
         "select_asset": "📈 Выберите актив из {category}:",
         "select_timeframe": "⏳ Выберите таймфрейм для анализа:",
         "signal": " <b>Торговый сигнал для {asset}{market_status}</b>\n\n"
-                  "⏳ <b>Таймфрейм:</b> {timeframe}\n"
-                  "📊 <b><b>Технический анализ:</b></b>\n{analysis}\n\n"
-                  "🎯 <b><b>Рекомендация:</b></b> {direction}\n"
-                  "💡 <b><b>Вывод:</b></b> {conclusion}\n\n"
+                  "⏳ Таймфрейм: {timeframe}\n"
+                  "📊 <b>Технический анализ:</b>\n{analysis}\n\n"
+                  "🎯 <b>Рекомендация:</b> {direction}\n"
+                  "💡 <b>Вывод:</b> {conclusion}\n\n"
                   "⚠️ <i>Это не финансовая рекомендация. Всегда проводите собственный анализ.</i>",
-    
-
         "cooldown": "⏳ Подождите {seconds} секунд перед следующим запросом",
         "cooldown_ended": "✅ Теперь вы можете запросить новые сигналы!",
         "settings": "⚙️ Меню настроек\n\nВыберите опцию:",
@@ -461,20 +459,20 @@ async def generate_signal(
 
     # RSI анализ
     if rsi < 30:
-        analysis.append(f"▪️ <b>RSI:</b> {round(rsi, 2)} (Oversold)")
+        analysis.append(f"▪️ RSI: {round(rsi, 2)} (Oversold)")
         buy_score += 2
     elif rsi > 70:
-        analysis.append(f"▪️ <b>RSI:</b> {round(rsi, 2)} (Overbought)")
+        analysis.append(f"▪️ RSI: {round(rsi, 2)} (Overbought)")
         sell_score += 2
     else:
-        analysis.append(f"▪️ <b>RSI:</b> {round(rsi, 2)} (Neutral)")
+        analysis.append(f"▪️ RSI: {round(rsi, 2)} (Neutral)")
 
     # MACD анализ
     if macd_line > signal_line:
-        analysis.append("▪️ <b>MACD:</b> Bullish crossover")
+        analysis.append("▪️ MACD: Bullish crossover")
         buy_score += 1
     else:
-        analysis.append("▪️ <b>MACD:</b> Bearish crossover")
+        analysis.append("▪️ MACD: Bearish crossover")
         sell_score += 1
 
     # Bollinger Bands
@@ -487,14 +485,14 @@ async def generate_signal(
 
     # SMA анализ
     if sma20 > sma50:
-        analysis.append("▪️ <b>SMA20 > SMA50</b> (Uptrend)")
+        analysis.append("▪️ SMA20 > SMA50 (Uptrend)")
         buy_score += 1
     else:
         analysis.append("▪️ SMA20 < SMA50 (Downtrend)")
         sell_score += 1
 
     # ATR (волатильность)
-    analysis.append(f"▪️ <b>ATR:</b> {round(atr, 4)} (Volatility)")
+    analysis.append(f"▪️ ATR: {round(atr, 4)} (Volatility)")
 
     # Генерация сигнала
     if buy_score >= sell_score:
@@ -730,10 +728,10 @@ async def generate_signal_handler(message: types.Message):
         elif language == "ru":
             signal_text = (
                 f"🚀 Торговый сигнал для {asset}{market_status}\n\n"
-                f"⏳ <b>Таймфрейм:</b> {timeframe}\n"
-                f"📊 <b>Технический анализ:</b>\n{analysis}\n\n"
-                f"🎯 <b>Рекомендация:</b> {direction}\n"
-                f"💡 <b>Вывод:</b> {conclusion}\n\n"
+                f"⏳ Таймфрейм: {timeframe}\n"
+                f"📊 Технический анализ:\n{analysis}\n\n"
+                f"🎯 Рекомендация: {direction}\n"
+                f"💡 Вывод: {conclusion}\n\n"
                 f"⚠️ Это не финансовая рекомендация. Всегда проводите собственный анализ."
             )
         else:  # en
