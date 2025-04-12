@@ -240,9 +240,9 @@ ASSET_CATEGORIES = {
 
 # Таймфреймы
 TIMEFRAMES = {
-    "en": ["3 min", "5 min", "15 min", "1 hour"],
-    "ru": ["3 мин", "5 мин", "15 мин", "1 час"],
-    "de": ["3 min", "5 min", "15 min", "1 Stunde"]
+    "en": ["30 sec", "1 min", "2 min", "3 min", "5 min"],
+    "ru": ["30 сек", "1 мин", "2 мин", "3 мин", "5 мин"],
+    "de": ["30 sec", "1 min", "2 min", "3 min", "5 min"]
 }
 
 # Языки
