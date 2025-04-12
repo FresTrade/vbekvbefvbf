@@ -44,7 +44,7 @@ MIN_DATA_POINTS = 30
 ssl_context = ssl.create_default_context(cafile=certifi.where())
 
 # Инициализация бота
-bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML" if parse_mode == "HTML" else None))
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher()
 
 # Глобальные переменные
