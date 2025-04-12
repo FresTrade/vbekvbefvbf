@@ -1,0 +1,46 @@
+2025-04-01 21:41:51,257 - __main__ - INFO - Bot successfully started
+2025-04-01 21:41:51,257 - aiogram.dispatcher - INFO - Start polling
+2025-04-01 21:41:52,592 - aiogram.dispatcher - INFO - Run polling for bot @freshoption76_bot id=7848770888 - 'Fresh | Option'
+2025-04-01 21:42:07,282 - __main__ - ERROR - Photo sending failed: HTTP Client says - ClientOSError: [Errno 2] Can not write request body for https://api.telegram.org/bot7848770888:AAGmkkF32CUE5TdBZYLjbfqRpq43grMOywc/sendPhoto
+2025-04-01 21:42:07,544 - aiogram.event - INFO - Update id=45151946 is handled. Duration 361 ms by bot id=7848770888
+2025-04-01 21:42:09,407 - aiogram.event - INFO - Update id=45151947 is handled. Duration 74 ms by bot id=7848770888
+2025-04-01 21:42:10,762 - __main__ - ERROR - Password handling error: 1 validation error for ReplyKeyboardMarkup
+keyboard.4.0
+  Input should be a valid dictionary or instance of KeyboardButton [type=model_type, input_value='⚙️ Settings', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.10/v/model_type
+2025-04-01 21:42:10,899 - aiogram.event - INFO - Update id=45151948 is handled. Duration 139 ms by bot id=7848770888
+2025-04-01 21:42:14,010 - aiogram.event - INFO - Update id=45151949 is not handled. Duration 1 ms by bot id=7848770888
+2025-04-01 21:42:52,748 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-04-01 21:42:52,749 - aiogram.dispatcher - INFO - Polling stopped for bot @freshoption76_bot id=7848770888 - 'Fresh | Option'
+2025-04-01 21:42:52,749 - aiogram.dispatcher - INFO - Polling stopped
+2025-04-01 23:57:52,082 - __main__ - INFO - Bot successfully started
+2025-04-01 23:57:52,083 - __main__ - WARNING - Created missing images directory
+2025-04-01 23:57:52,083 - aiogram.dispatcher - INFO - Start polling
+2025-04-01 23:57:52,120 - aiogram.dispatcher - INFO - Run polling for bot @freshoption76_bot id=7848770888 - 'Fresh | Option'
+2025-04-01 23:58:07,938 - __main__ - ERROR - Image file not found: images/welcome.png
+2025-04-01 23:58:08,085 - aiogram.event - INFO - Update id=45151987 is handled. Duration 149 ms by bot id=7848770888
+2025-04-01 23:58:18,116 - aiogram.event - INFO - Update id=45151988 is handled. Duration 74 ms by bot id=7848770888
+2025-04-01 23:58:22,135 - aiogram.event - INFO - Update id=45151989 is handled. Duration 93 ms by bot id=7848770888
+2025-04-01 23:58:30,013 - aiogram.event - INFO - Update id=45151990 is handled. Duration 48 ms by bot id=7848770888
+2025-04-02 00:01:01,291 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-04-02 00:01:01,291 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7848770888)
+2025-04-02 00:01:12,479 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 7848770888)
+2025-04-02 00:04:36,101 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-04-02 00:04:36,102 - aiogram.dispatcher - INFO - Polling stopped for bot @freshoption76_bot id=7848770888 - 'Fresh | Option'
+2025-04-02 00:04:36,102 - aiogram.dispatcher - INFO - Polling stopped
+2025-04-02 00:05:34,811 - __main__ - ERROR - Startup error: Telegram server says - Unauthorized
+2025-04-02 00:05:34,812 - __main__ - ERROR - Bot stopped with error: Telegram server says - Unauthorized
+2025-04-02 00:05:34,813 - __main__ - ERROR - Fatal error: Telegram server says - Unauthorized
+2025-04-02 00:05:34,916 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x121c1b380>
+2025-04-02 00:05:34,916 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x121c22c90>, 106681.523093208)])']
+connector: <aiohttp.connector.TCPConnector object at 0x121c1af90>
+2025-04-02 00:05:58,790 - __main__ - INFO - Bot successfully started
+2025-04-02 00:05:58,791 - aiogram.dispatcher - INFO - Start polling
+2025-04-02 00:05:58,846 - aiogram.dispatcher - INFO - Run polling for bot @freshoption76_bot id=7848770888 - 'Fresh | Option'
+2025-04-02 00:06:04,601 - __main__ - ERROR - Image file not found: images/welcome.png
+2025-04-02 00:06:04,789 - aiogram.event - INFO - Update id=45151991 is handled. Duration 188 ms by bot id=7848770888
+2025-04-02 00:06:18,196 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-04-02 00:06:18,197 - aiogram.dispatcher - INFO - Polling stopped for bot @freshoption76_bot id=7848770888 - 'Fresh | Option'
+2025-04-02 00:06:18,197 - aiogram.dispatcher - INFO - Polling stopped
