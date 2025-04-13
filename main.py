@@ -293,7 +293,7 @@ TEXTS = {
                  "An unexpected error occurred. Please try again later.",
         "registration_info": (
     "🚀 To start using our platform, please go through this link: "
-    "<a href='https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main'>ССЫЛКА НА РЕГИСТРАЦИЮ</a> 💼\n\n"
+    "(https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
     "💰 Make a deposit starting from $30. A higher deposit will unlock additional opportunities and better trading conditions for you.\n\n"
     "🗣️ After making a deposit, contact support to activate your account."
 )
@@ -332,7 +332,7 @@ TEXTS = {
                  "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже.",
         "registration_info": (
             "🚀 Чтобы начать пользоваться нашей платформой, перейдите по следующей ссылке: "
-            "[регистрация](https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
+            "(https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
             "💰 Сделайте депозит от 30$. Больший депозит откроет для вас дополнительные возможности и улучшенные условия для торговли.\n\n"
             "🗣️ После депозита напишите в поддержку (на русском) для активации вашего аккаунта."
         )
@@ -371,7 +371,7 @@ TEXTS = {
                  "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
         "registration_info": (
             "🚀 Um unsere Plattform zu nutzen, gehen Sie bitte über diesen Link: "
-            "[Registrierung](https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
+            "(https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
             "💰 Tätigen Sie eine Einzahlung von mindestens 30$. Eine höhere Einzahlung öffnet zusätzliche Möglichkeiten und bessere Handelsbedingungen für Sie.\n\n"
             "🗣️ Nach der Einzahlung wenden Sie sich an den Support (auf Russisch) um Ihr Konto zu aktivieren."
         )
