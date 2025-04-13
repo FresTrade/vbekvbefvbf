@@ -260,7 +260,7 @@ LANGUAGES = {
 # Текстовые сообщения
 TEXTS = {
     "en": {
-        "welcome": "🌟 Welcome to Trading Signals Bot!\n\n"
+        "welcome": "🌟Welcome to Trading Signals Bot!\n\n"
                    "Thank you for joining our trading community. "
                    "This bot provides professional trading signals for various assets.\n\n"
                    "💡 Key features:\n"
@@ -292,8 +292,10 @@ TEXTS = {
         "error": "⚠️ <b>Error occurred</b>\n\n"
                  "An unexpected error occurred. Please try again later.",
         "registration_info": (
-            "🚀 To start using our platform, make a deposit and activate your account. "
-            "Registration is here: 📲"
+            "🚀 To start using our platform, please go through this link: "
+            "(https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
+            "💰 Make a deposit starting from $30. A higher deposit will unlock additional opportunities and better trading conditions for you.\n\n"
+            "🗣️ After making a deposit, contact support to activate your account."
         )
     },
     "ru": {
@@ -329,8 +331,10 @@ TEXTS = {
         "error": "⚠️ <b>Произошла ошибка</b>\n\n"
                  "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже.",
         "registration_info": (
-            "🚀 Чтобы начать пользоваться нашей платформой, сделайте депозит и активируйте свой аккаунт. "
-            "Регистрация здесь: 📲"
+            "🚀 Чтобы начать пользоваться нашей платформой, перейдите по следующей ссылке: "
+            "(https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
+            "💰 Сделайте депозит от 30$. Больший депозит откроет для вас дополнительные возможности и улучшенные условия для торговли.\n\n"
+            "🗣️ После депозита напишите в поддержку (на русском) для активации вашего аккаунта."
         )
     },
     "de": {
@@ -352,9 +356,9 @@ TEXTS = {
         "signal": "🚀 <b>Handelssignal für {asset}{market_status}</b>\n\n"
                   "⏳ Zeitrahmen: {timeframe}\n"
                   "📊 <b>Technische Analyse:</b>\n{analysis}\n\n"
-                  "🎯 Empfehlung: {direction}\n"
-                  "💡 Fazit: {conclusion}\n\n"
-                  "⚠️ Dies ist keine Finanzberatung. Führen Sie immer eigene Recherchen durch.",
+                  "🎯 <b>Empfehlung:</b> {direction}\n"
+                  "💡 <b>Fazit:</b> {conclusion}\n\n"
+                  "⚠️ <i>Dies ist keine Finanzberatung. Führen Sie immer eigene Recherchen durch.</i>",
         "cooldown": "⏳ Bitte warten Sie {seconds} Sekunden bis zur nächsten Anfrage",
         "cooldown_ended": "✅ Sie können jetzt neue Signale anfordern!",
         "settings": "⚙️ Einstellungsmenü\n\nOption wählen:",
@@ -366,12 +370,13 @@ TEXTS = {
         "error": "⚠️ <b>Fehler aufgetreten</b>\n\n"
                  "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
         "registration_info": (
-            "🚀 Um unsere Plattform zu nutzen, tätigen Sie eine Einzahlung und aktivieren Sie Ihr Konto. "
-            "Registrierung hier: 📲"
+            "🚀 Um unsere Plattform zu nutzen, gehen Sie bitte über diesen Link: "
+            "(https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
+            "💰 Tätigen Sie eine Einzahlung von mindestens 30$. Eine höhere Einzahlung öffnet zusätzliche Möglichkeiten und bessere Handelsbedingungen für Sie.\n\n"
+            "🗣️ Nach der Einzahlung wenden Sie sich an den Support (auf Russisch) um Ihr Konto zu aktivieren."
         )
     }
 }
-
 
 def create_keyboard(
         items: List[str],
