@@ -292,11 +292,11 @@ TEXTS = {
         "error": "⚠️ <b>Error occurred</b>\n\n"
                  "An unexpected error occurred. Please try again later.",
         "registration_info": (
-            "🚀 To start using our platform, please go through this link: "
-            "[registration](https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
-            "💰 Make a deposit starting from $30. A higher deposit will unlock additional opportunities and better trading conditions for you.\n\n"
-            "🗣️ After making a deposit, contact support (in Russian) to activate your account."
-        )
+    "🚀 To start using our platform, please go through this link: "
+    "<a href='https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main'>ССЫЛКА НА РЕГИСТРАЦИЮ</a> 💼\n\n"
+    "💰 Make a deposit starting from $30. A higher deposit will unlock additional opportunities and better trading conditions for you.\n\n"
+    "🗣️ After making a deposit, contact support to activate your account."
+)
     },
     "ru": {
         "welcome": "🌟 Добро пожаловать в бота торговых сигналов!\n\n"
