@@ -258,9 +258,10 @@ LANGUAGES = {
 }
 
 # Текстовые сообщения
+# Updated TEXTS dictionary with registration button for all languages
 TEXTS = {
     "en": {
-        "welcome": "🌟Welcome to Trading Signals Bot!\n\n"
+        "welcome": "🌟 Welcome to Trading Signals Bot!\n\n"
                    "Thank you for joining our trading community. "
                    "This bot provides professional trading signals for various assets.\n\n"
                    "💡 Key features:\n"
@@ -292,10 +293,9 @@ TEXTS = {
         "error": "⚠️ <b>Error occurred</b>\n\n"
                  "An unexpected error occurred. Please try again later.",
         "registration_info": (
-            "🚀 To start using our platform, please go through this link: "
-            "(https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
-            "💰 Make a deposit starting from $30. A higher deposit will unlock additional opportunities and better trading conditions for you.\n\n"
-            "🗣️ After making a deposit, contact support to activate your account."
+            "🚀 To start using our platform, click the button below to register:\n"
+            "💼 After registering, make a deposit to unlock additional opportunities.\n"
+            "🗣️ Contact support for account activation once your deposit is made."
         )
     },
     "ru": {
@@ -317,9 +317,9 @@ TEXTS = {
         "signal": " <b>Торговый сигнал для {asset}{market_status}</b>\n\n"
                   "⏳ Таймфрейм: {timeframe}\n"
                   "📊 <b>Технический анализ:</b>\n{analysis}\n\n"
-                  "🎯 <b>Рекомендация:</b> {direction}\n"
-                  "💡 <b>Вывод:</b> {conclusion}\n\n"
-                  "⚠️ <i>Это не финансовая рекомендация. Всегда проводите собственный анализ.</i>",
+                  "🎯 Рекомендация: {direction}\n"
+                  "💡 Вывод: {conclusion}\n\n"
+                  "⚠️ Это не финансовая рекомендация. Всегда проводите собственный анализ.",
         "cooldown": "⏳ Подождите {seconds} секунд перед следующим запросом",
         "cooldown_ended": "✅ Теперь вы можете запросить новые сигналы!",
         "settings": "⚙️ Меню настроек\n\nВыберите опцию:",
@@ -331,10 +331,9 @@ TEXTS = {
         "error": "⚠️ <b>Произошла ошибка</b>\n\n"
                  "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже.",
         "registration_info": (
-            "🚀 Чтобы начать пользоваться нашей платформой, перейдите по следующей ссылке: "
-            "(https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
-            "💰 Сделайте депозит от 30$. Больший депозит откроет для вас дополнительные возможности и улучшенные условия для торговли.\n\n"
-            "🗣️ После депозита напишите в поддержку (на русском) для активации вашего аккаунта."
+            "🚀 Чтобы начать пользоваться нашей платформой, перейдите по следующей ссылке для регистрации:\n"
+            "💼 После регистрации сделайте депозит, чтобы открыть дополнительные возможности.\n"
+            "🗣️ Напишите в поддержку для активации вашего аккаунта после депозита."
         )
     },
     "de": {
@@ -356,9 +355,9 @@ TEXTS = {
         "signal": "🚀 <b>Handelssignal für {asset}{market_status}</b>\n\n"
                   "⏳ Zeitrahmen: {timeframe}\n"
                   "📊 <b>Technische Analyse:</b>\n{analysis}\n\n"
-                  "🎯 <b>Empfehlung:</b> {direction}\n"
-                  "💡 <b>Fazit:</b> {conclusion}\n\n"
-                  "⚠️ <i>Dies ist keine Finanzberatung. Führen Sie immer eigene Recherchen durch.</i>",
+                  "🎯 Empfehlung: {direction}\n"
+                  "💡 Fazit: {conclusion}\n\n"
+                  "⚠️ Dies ist keine Finanzberatung. Führen Sie immer eigene Recherchen durch.",
         "cooldown": "⏳ Bitte warten Sie {seconds} Sekunden bis zur nächsten Anfrage",
         "cooldown_ended": "✅ Sie können jetzt neue Signale anfordern!",
         "settings": "⚙️ Einstellungsmenü\n\nOption wählen:",
@@ -370,13 +369,51 @@ TEXTS = {
         "error": "⚠️ <b>Fehler aufgetreten</b>\n\n"
                  "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
         "registration_info": (
-            "🚀 Um unsere Plattform zu nutzen, gehen Sie bitte über diesen Link: "
-            "(https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
-            "💰 Tätigen Sie eine Einzahlung von mindestens 30$. Eine höhere Einzahlung öffnet zusätzliche Möglichkeiten und bessere Handelsbedingungen für Sie.\n\n"
-            "🗣️ Nach der Einzahlung wenden Sie sich an den Support (auf Russisch) um Ihr Konto zu aktivieren."
+            "🚀 Um unsere Plattform zu nutzen, klicken Sie bitte unten auf die Schaltfläche zur Registrierung:\n"
+            "💼 Nach der Registrierung tätigen Sie eine Einzahlung, um zusätzliche Möglichkeiten zu eröffnen.\n"
+            "🗣️ Kontaktieren Sie den Support für die Aktivierung Ihres Kontos nach der Einzahlung."
         )
     }
 }
+
+# Modify the `start_command` function to include the registration button in all languages
+@dp.message(Command("start"))
+async def start_command(message: types.Message):
+    """Обработчик команды /start"""
+    try:
+        user = validate_user(message.from_user.id)
+        welcome_image = FSInputFile(IMAGE_PATHS["welcome"])
+
+        # Create the registration button for all languages
+        registration_button = KeyboardButton("Register Here", url="https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main")
+
+        # Determine the user's language
+        language = user.get("language", "en")
+
+        # Create the keyboard for the welcome message
+        keyboard = create_keyboard([BUTTONS["next"][language]], row_width=1)
+        keyboard.add(registration_button)
+
+        # Send the welcome message with the registration button
+        if not await safe_send_photo(
+                message.chat.id,
+                photo=welcome_image,
+                caption=TEXTS[language]["welcome"],
+                reply_markup=keyboard
+        ):
+            await safe_send_message(
+                message.chat.id,
+                TEXTS[language]["welcome"],
+                reply_markup=keyboard
+            )
+    except Exception as e:
+        logger.error(f"Error in start_command: {e}")
+        await safe_send_message(
+            message.chat.id,
+            TEXTS["en"]["error"],
+            reply_markup=ReplyKeyboardRemove()
+        )
+
 
 def create_keyboard(
         items: List[str],
