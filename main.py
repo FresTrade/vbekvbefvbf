@@ -168,6 +168,11 @@ BUTTONS = {
         "ru": "🔙 Назад",
         "de": "🔙 Zurück"
     },
+    "next": {
+        "en": "➡️ Next",
+        "ru": "➡️ Далее",
+        "de": "➡️ Weiter"
+    },
     "settings": {
         "en": "⚙️ Settings",
         "ru": "⚙️ Настройки",
@@ -285,7 +290,13 @@ TEXTS = {
                    "Currently unable to fetch market data for {asset}.\n"
                    "Please try again later or select a different asset.",
         "error": "⚠️ <b>Error occurred</b>\n\n"
-                 "An unexpected error occurred. Please try again later."
+                 "An unexpected error occurred. Please try again later.",
+        "registration_info": (
+            "🚀 To start using our platform, please go through this link: "
+            "[registration](https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
+            "💰 Make a deposit starting from $30. A higher deposit will unlock additional opportunities and better trading conditions for you.\n\n"
+            "🗣️ After making a deposit, contact support (in Russian) to activate your account."
+        )
     },
     "ru": {
         "welcome": "🌟 Добро пожаловать в бота торговых сигналов!\n\n"
@@ -318,7 +329,13 @@ TEXTS = {
                    "В настоящее время невозможно получить данные по {asset}.\n"
                    "Попробуйте позже или выберите другой актив.",
         "error": "⚠️ <b>Произошла ошибка</b>\n\n"
-                 "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже."
+                 "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже.",
+        "registration_info": (
+            "🚀 Чтобы начать пользоваться нашей платформой, перейдите по следующей ссылке: "
+            "[регистрация](https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
+            "💰 Сделайте депозит от 30$. Больший депозит откроет для вас дополнительные возможности и улучшенные условия для торговли.\n\n"
+            "🗣️ После депозита напишите в поддержку (на русском) для активации вашего аккаунта."
+        )
     },
     "de": {
         "welcome": "🌟 <b>Willkommen beim Trading-Signale-Bot!</b>\n\n"
@@ -351,7 +368,13 @@ TEXTS = {
                    "Derzeit können keine Marktdaten für {asset} abgerufen werden.\n"
                    "Bitte versuchen Sie es später erneut oder wählen Sie ein anderes Asset.",
         "error": "⚠️ <b>Fehler aufgetreten</b>\n\n"
-                 "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
+                 "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
+        "registration_info": (
+            "🚀 Um unsere Plattform zu nutzen, gehen Sie bitte über diesen Link: "
+            "[Registrierung](https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main) 💼\n\n"
+            "💰 Tätigen Sie eine Einzahlung von mindestens 30$. Eine höhere Einzahlung öffnet zusätzliche Möglichkeiten und bessere Handelsbedingungen für Sie.\n\n"
+            "🗣️ Nach der Einzahlung wenden Sie sich an den Support (auf Russisch) um Ihr Konto zu aktivieren."
+        )
     }
 }
 
@@ -360,17 +383,20 @@ def create_keyboard(
         row_width: int = 2,
         back: bool = False,
         settings: bool = False,
-        language: str = "en"
+        language: str = "en",
+        next_button: bool = False
 ) -> ReplyKeyboardMarkup:
     """Создает клавиатуру с заданными параметрами"""
     buttons = [[KeyboardButton(text=item)] for item in items]
 
-    if back or settings:
+    if back or settings or next_button:
         row = []
         if back:
             row.append(KeyboardButton(text=BUTTONS["back"][language]))
         if settings:
             row.append(KeyboardButton(text=BUTTONS["settings"][language]))
+        if next_button:
+            row.append(KeyboardButton(text=BUTTONS["next"][language]))
         buttons.append(row)
 
     return ReplyKeyboardMarkup(
@@ -581,7 +607,33 @@ async def set_language(message: types.Message):
         user = validate_user(message.from_user.id)
         language = LANGUAGES[message.text]
         user["language"] = language
+        user["awaiting_registration"] = True
+
+        await safe_send_message(
+            message.chat.id,
+            TEXTS[language]["registration_info"],
+            reply_markup=create_keyboard(
+                [BUTTONS["next"][language]],
+                row_width=1,
+                next_button=False
+            )
+        )
+    except Exception as e:
+        logger.error(f"Error in set_language: {e}")
+        await safe_send_message(
+            message.chat.id,
+            TEXTS["en"]["error"],
+            reply_markup=ReplyKeyboardRemove()
+        )
+
+@dp.message(F.text.in_([BUTTONS["next"][lang] for lang in BUTTONS["next"]]))
+async def next_handler(message: types.Message):
+    """Обработчик кнопки 'Далее'"""
+    try:
+        user = validate_user(message.from_user.id)
+        language = user.get("language", "en")
         user["awaiting_password"] = True
+        user["awaiting_registration"] = False
 
         await safe_send_message(
             message.chat.id,
@@ -589,7 +641,7 @@ async def set_language(message: types.Message):
             reply_markup=ReplyKeyboardRemove()
         )
     except Exception as e:
-        logger.error(f"Error in set_language: {e}")
+        logger.error(f"Error in next_handler: {e}")
         await safe_send_message(
             message.chat.id,
             TEXTS["en"]["error"],
