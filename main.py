@@ -546,6 +546,32 @@ async def generate_signal(
         )
 
     return direction, "\n".join(analysis), conclusion
+async def safe_send_photo(
+        chat_id: int,
+        photo: Union[str, FSInputFile],
+        caption: str = "",
+        **kwargs
+) -> bool:
+    """Безопасная отправка фото с обработкой ошибок"""
+    try:
+        # Логирование перед попыткой отправки фото
+        logger.info(f"Attempting to send photo to chat id: {chat_id}")
+
+        # Попытка отправить фото
+        await bot.send_photo(
+            chat_id,
+            photo=photo,
+            caption=escape(caption),
+            **kwargs
+        )
+        return True
+    except Exception as e:
+        logger.error(f"Photo sending failed: {e}")
+        return await safe_send_message(
+            chat_id,
+            caption,
+            **kwargs
+        )
 
 async def cooldown_watcher():
     """Отслеживает время ожидания между запросами"""
