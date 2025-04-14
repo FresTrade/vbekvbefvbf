@@ -14,6 +14,7 @@ from typing import Dict, Any, Optional, List, Union
 
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types import (
     ReplyKeyboardMarkup,
     KeyboardButton,
@@ -57,7 +58,7 @@ MARKET_CLOSE = time(16, 0)
 
 # Пути к изображениям
 IMAGE_PATHS = {
-    "welcome": "WELCOME.png",
+    "welcome": "WELCOME.PNG",
     "buy": {
         "en": "BUY.JPG",
         "ru": "POKUPAEM.JPG",
@@ -67,7 +68,8 @@ IMAGE_PATHS = {
         "en": "SELL.JPG",
         "ru": "PRODAEM.JPG",
         "de": "VERKAUFEN.JPG"
-    }
+    },
+    "registration": "REGISTRANION.png"  # Add this line
 }
 
 class SingleInstance:
@@ -162,6 +164,7 @@ async def safe_send_photo(
         )
 
 # Кнопки интерфейса
+# Кнопки интерфейса
 BUTTONS = {
     "back": {
         "en": "🔙 Back",
@@ -182,6 +185,11 @@ BUTTONS = {
         "en": "🌐 Change language",
         "ru": "🌐 Сменить язык",
         "de": "🌐 Sprache ändern"
+    },
+    "register": {
+        "en": "📝 Register",
+        "ru": "📝 Регистрация",
+        "de": "📝 Registrieren"
     }
 }
 
@@ -258,10 +266,9 @@ LANGUAGES = {
 }
 
 # Текстовые сообщения
-# Updated TEXTS dictionary with registration button for all languages
 TEXTS = {
     "en": {
-        "welcome": "🌟 Welcome to Trading Signals Bot!\n\n"
+        "welcome": "🌟Welcome to Trading Signals Bot!\n\n"
                    "Thank you for joining our trading community. "
                    "This bot provides professional trading signals for various assets.\n\n"
                    "💡 Key features:\n"
@@ -293,21 +300,17 @@ TEXTS = {
         "error": "⚠️ <b>Error occurred</b>\n\n"
                  "An unexpected error occurred. Please try again later.",
         "registration_info": (
-            "🚀 To start using our platform, click the button below to register:\n"
-            "💼 After registering, make a deposit to unlock additional opportunities.\n"
-            "🗣️ Contact support for account activation once your deposit is made."
-        )
+             "🚀 To start using our platform, follow these steps:\n\n"
+            "1️⃣ Click the button below to register on the platform.\n\n"
+            "2️⃣ Make a deposit of at least $30.The bigger the deposit, the more opportunities and better trading conditions you will have.\n\n"
+            "3️⃣ After making the deposit, contact support @fresh_option for account activation.\n\n"
+            "🗣️ Support will provide you with the password to activate your account, and you'll be able to start trading."
+        ),
+        "registration_button": "📝 Register",
+        "registration_link": "https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main"
     },
     "ru": {
-        "welcome": "🌟 Добро пожаловать в бота торговых сигналов!\n\n"
-                   "Спасибо за присоединение к нашему торговому сообществу. "
-                   "Этот бот предоставляет профессиональные торговые сигналы для различных активов.\n\n"
-                   "💡 <b>Основные возможности:</b>\n"
-                   "✔️ Торговые сигналы в реальном времени\n"
-                   "✔️ Поддержка нескольких языков\n"
-                   "✔️ Технический анализ рынка\n"
-                   "✔️ Регулярные рыночные обновления\n\n"
-                   "Для начала работы выберите предпочитаемый язык:",
+
         "password_prompt": "🔒 Введите пароль для продолжения:",
         "password_correct": "✅ Доступ разрешен! Выберите категорию актива:",
         "password_incorrect": "❌ Неверный пароль! Попробуйте снова.",
@@ -317,9 +320,9 @@ TEXTS = {
         "signal": " <b>Торговый сигнал для {asset}{market_status}</b>\n\n"
                   "⏳ Таймфрейм: {timeframe}\n"
                   "📊 <b>Технический анализ:</b>\n{analysis}\n\n"
-                  "🎯 Рекомендация: {direction}\n"
-                  "💡 Вывод: {conclusion}\n\n"
-                  "⚠️ Это не финансовая рекомендация. Всегда проводите собственный анализ.",
+                  "🎯 <b>Рекомендация:</b> {direction}\n"
+                  "💡 <b>Вывод:</b> {conclusion}\n\n"
+                  "⚠️ <i>Это не финансовая рекомендация. Всегда проводите собственный анализ.</i>",
         "cooldown": "⏳ Подождите {seconds} секунд перед следующим запросом",
         "cooldown_ended": "✅ Теперь вы можете запросить новые сигналы!",
         "settings": "⚙️ Меню настроек\n\nВыберите опцию:",
@@ -331,10 +334,15 @@ TEXTS = {
         "error": "⚠️ <b>Произошла ошибка</b>\n\n"
                  "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже.",
         "registration_info": (
-            "🚀 Чтобы начать пользоваться нашей платформой, перейдите по следующей ссылке для регистрации:\n"
-            "💼 После регистрации сделайте депозит, чтобы открыть дополнительные возможности.\n"
-            "🗣️ Напишите в поддержку для активации вашего аккаунта после депозита."
-        )
+            "🚀 Чтобы начать пользоваться нашей платформой, выполните следующие шаги:\n\n"
+            "1️⃣ Нажмите кнопку ниже, чтобы зарегистрироваться на платформе.\n\n"
+            "2️⃣ Сделайте депозит от 30$.Чем больше депозит, тем больше возможностей и улучшенные условия для торговли.\n\n"
+            "3️⃣ После того как сделаете депозит, свяжитесь с поддержкой @fresh_option для активации вашего аккаунта.\n\n"
+            "🗣️ Поддержка предоставит вам пароль для активации вашего аккаунта, и вы сможете начать торговать.\n\n"
+        ),"registration_button": "📝 Register",
+        "registration_link": "https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main"
+
+
     },
     "de": {
         "welcome": "🌟 <b>Willkommen beim Trading-Signale-Bot!</b>\n\n"
@@ -355,9 +363,9 @@ TEXTS = {
         "signal": "🚀 <b>Handelssignal für {asset}{market_status}</b>\n\n"
                   "⏳ Zeitrahmen: {timeframe}\n"
                   "📊 <b>Technische Analyse:</b>\n{analysis}\n\n"
-                  "🎯 Empfehlung: {direction}\n"
-                  "💡 Fazit: {conclusion}\n\n"
-                  "⚠️ Dies ist keine Finanzberatung. Führen Sie immer eigene Recherchen durch.",
+                  "🎯 <b>Empfehlung:</b> {direction}\n"
+                  "💡 <b>Fazit:</b> {conclusion}\n\n"
+                  "⚠️ <i>Dies ist keine Finanzberatung. Führen Sie immer eigene Recherchen durch.</i>",
         "cooldown": "⏳ Bitte warten Sie {seconds} Sekunden bis zur nächsten Anfrage",
         "cooldown_ended": "✅ Sie können jetzt neue Signale anfordern!",
         "settings": "⚙️ Einstellungsmenü\n\nOption wählen:",
@@ -369,51 +377,15 @@ TEXTS = {
         "error": "⚠️ <b>Fehler aufgetreten</b>\n\n"
                  "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
         "registration_info": (
-            "🚀 Um unsere Plattform zu nutzen, klicken Sie bitte unten auf die Schaltfläche zur Registrierung:\n"
-            "💼 Nach der Registrierung tätigen Sie eine Einzahlung, um zusätzliche Möglichkeiten zu eröffnen.\n"
-            "🗣️ Kontaktieren Sie den Support für die Aktivierung Ihres Kontos nach der Einzahlung."
-        )
+            "🚀 Um unsere Plattform zu nutzen, befolgen Sie diese Schritte:\n\n"
+            "1️⃣ Klicken Sie auf die Schaltfläche unten, um sich auf der Plattform zu registrieren.\n\n"
+            "2️⃣ Tätigen Sie eine Einzahlung von mindestens 30$.Je größer die Einzahlung, desto mehr Möglichkeiten und bessere Handelsbedingungen erhalten Sie.\n\n"
+            "3️⃣ Nachdem Sie die Einzahlung getätigt haben, kontaktieren Sie den Support @fresh_option zur Aktivierung Ihres Kontos.\n\n"
+            "🗣️ Der Support wird Ihnen das Passwort zur Aktivierung Ihres Kontos zur Verfügung stellen, und Sie können mit dem Handel beginnen.\n\n"
+        ),"registration_button": "📝 Register",
+        "registration_link": "https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main"
     }
 }
-
-# Modify the `start_command` function to include the registration button in all languages
-@dp.message(Command("start"))
-async def start_command(message: types.Message):
-    """Обработчик команды /start"""
-    try:
-        user = validate_user(message.from_user.id)
-        welcome_image = FSInputFile(IMAGE_PATHS["welcome"])
-
-        # Create the registration button for all languages
-        registration_button = KeyboardButton("Register Here", url="https://u3.shortink.io/register?utm_campaign=816605&utm_source=affiliate&utm_medium=sr&a=r6voYUglZqvO4W&ac=main")
-
-        # Determine the user's language
-        language = user.get("language", "en")
-
-        # Create the keyboard for the welcome message
-        keyboard = create_keyboard([BUTTONS["next"][language]], row_width=1)
-        keyboard.add(registration_button)
-
-        # Send the welcome message with the registration button
-        if not await safe_send_photo(
-                message.chat.id,
-                photo=welcome_image,
-                caption=TEXTS[language]["welcome"],
-                reply_markup=keyboard
-        ):
-            await safe_send_message(
-                message.chat.id,
-                TEXTS[language]["welcome"],
-                reply_markup=keyboard
-            )
-    except Exception as e:
-        logger.error(f"Error in start_command: {e}")
-        await safe_send_message(
-            message.chat.id,
-            TEXTS["en"]["error"],
-            reply_markup=ReplyKeyboardRemove()
-        )
-
 
 def create_keyboard(
         items: List[str],
@@ -637,24 +609,40 @@ async def start_command(message: types.Message):
             reply_markup=ReplyKeyboardRemove()
         )
 
+
 @dp.message(F.text.in_(LANGUAGES.keys()))
 async def set_language(message: types.Message):
-    """Устанавливает язык пользователя"""
+    """Устанавливает язык пользователя и отправляет информацию о регистрации"""
     try:
         user = validate_user(message.from_user.id)
         language = LANGUAGES[message.text]
         user["language"] = language
         user["awaiting_registration"] = True
 
-        await safe_send_message(
-            message.chat.id,
-            TEXTS[language]["registration_info"],
-            reply_markup=create_keyboard(
-                [BUTTONS["next"][language]],
-                row_width=1,
-                next_button=False
-            )
+        logger.info(f"User {message.from_user.id} set language to {language}")  # Логируем выбор языка
+
+        registration_image = FSInputFile(IMAGE_PATHS["registration"])
+
+        # Создаем кнопки для регистрации и перехода
+        register_button = InlineKeyboardButton(
+            text=BUTTONS["register"][language],
+            url=TEXTS[language]["registration_link"]
         )
+        next_button = InlineKeyboardButton(
+            text=BUTTONS["next"][language],
+            callback_data="registration_next"
+        )
+
+        inline_markup = InlineKeyboardMarkup(inline_keyboard=[[register_button, next_button]])
+
+        # Отправляем фото с инлайн-кнопками
+        await bot.send_photo(
+            chat_id=message.chat.id,
+            photo=registration_image,
+            caption=TEXTS[language]["registration_info"],
+            reply_markup=inline_markup
+        )
+
     except Exception as e:
         logger.error(f"Error in set_language: {e}")
         await safe_send_message(
@@ -662,6 +650,34 @@ async def set_language(message: types.Message):
             TEXTS["en"]["error"],
             reply_markup=ReplyKeyboardRemove()
         )
+
+
+
+# Добавляем обработчик для кнопки "Далее"
+@dp.callback_query(F.data == "registration_next")
+async def registration_next_handler(callback_query: types.CallbackQuery):
+    try:
+        user = validate_user(callback_query.from_user.id)
+        language = user.get("language", "en")
+        user["awaiting_password"] = True
+        user["awaiting_registration"] = False
+
+        await callback_query.message.edit_reply_markup(reply_markup=None)  # Убираем инлайн-кнопки
+        await safe_send_message(
+            callback_query.message.chat.id,
+            TEXTS[language]["password_prompt"],
+            reply_markup=ReplyKeyboardRemove()
+        )
+        await callback_query.answer()  # Подтверждаем обработку callback
+
+    except Exception as e:
+        logger.error(f"Error in registration_next_handler: {e}")
+        await safe_send_message(
+            callback_query.message.chat.id,
+            TEXTS["en"]["error"],
+            reply_markup=ReplyKeyboardRemove()
+        )
+
 
 @dp.message(F.text.in_([BUTTONS["next"][lang] for lang in BUTTONS["next"]]))
 async def next_handler(message: types.Message):
