@@ -69,7 +69,7 @@ IMAGE_PATHS = {
         "ru": "PRODAEM.JPG",
         "de": "VERKAUFEN.JPG"
     },
-    "registration": "REGISTRANION.png"  # Add this line
+    "registration": "REGISTRACION.png"  # Add this line
 }
 
 class SingleInstance:
